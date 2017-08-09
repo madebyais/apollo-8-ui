@@ -2,11 +2,12 @@ v = {}
 editor = {}
 
 ajax = (opts, cb) ->
+  opts.data = {} if not opts.data
+
   $.ajax(
     type: opts.method
     url: opts.url
-    data: opts.data or {}
-    dataType: 'json'
+    data: opts.data
     success: (r) ->
       cb(null, r)
     error: (a, b, c) ->
@@ -103,7 +104,7 @@ nginxUpdate = () ->
     url: url
     data: 
       content: conf
-  
+
   ajax opts, (err, resp) ->
     return alert(err.b) if err
     location.reload() 
