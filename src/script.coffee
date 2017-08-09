@@ -5,6 +5,7 @@ ajax = (opts, cb) ->
   $.ajax(
     type: opts.method
     url: opts.url
+    data: opts.data or {}
     dataType: 'json'
     success: (r) ->
       cb(null, r)
@@ -27,6 +28,7 @@ __initialize_app_vue = () ->
       loadNginxConfd: loadNginxConfd
       nginxCreateSubmit: nginxCreateSubmit
       nginxGetSelected: nginxGetSelected
+      nginxUpdate: nginxUpdate
 
 __initialize_editor = () ->
   editor = ace.edit 'editor-nginx'
@@ -87,3 +89,21 @@ nginxGetSelected = (item, ev) ->
     $('ul#list-nginx li').removeClass('active');
     $('#nginx-' + nginxConfigName).addClass('active');
     editor.setValue resp.data
+
+### -------------------
+    @vue
+    nginxUpdate - update nginx content
+--------------------- ###
+nginxUpdate = () ->
+  conf = editor.getValue()
+  url = env.baseUrl + '/api/v1/nginx/' + $('ul#list-nginx > li.active').text()
+
+  opts =
+    method: 'PUT'
+    url: url
+    data: 
+      content: conf
+  
+  ajax opts, (err, resp) ->
+    return alert(err.b) if err
+    location.reload() 
