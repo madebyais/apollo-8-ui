@@ -47,9 +47,9 @@ loadNginxConfd = (ev) ->
     method: 'GET'
     url: url
 
-  ajax opts, (err, data) ->
+  ajax opts, (err, resp) ->
     alert err.c if err
-    v._data.nginxConfd = data
+    v._data.nginxConfd = resp.data
 
 ### -------------------
     @vue
@@ -63,6 +63,6 @@ nginxCreateSubmit = (ev) ->
     method: 'POST'
     url: url
 
-  ajax opts, (err, data) ->
+  ajax opts, (err, resp) ->
     alert err.c if err
     location.reload()
