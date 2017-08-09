@@ -75,8 +75,8 @@ nginxCreateSubmit = (ev) ->
     nginxGetSelected - get selected conf.d file
 --------------------- ###
 nginxGetSelected = (item, ev) ->
-  nginxConfigName = item
-  url = env.baseUrl + '/api/v1/nginx/' + nginxConfigName
+  nginxConfigName = item.replace('.conf', '')
+  url = env.baseUrl + '/api/v1/nginx/' + nginxConfigName + '.conf'
   
   opts =
     method: 'GET'
@@ -84,4 +84,6 @@ nginxGetSelected = (item, ev) ->
 
   ajax opts, (err, resp) ->
     alert err.c if err
+    $('ul#list-nginx li').removeClass('active');
+    $('#nginx-' + nginxConfigName).addClass('active');
     editor.setValue resp.data
