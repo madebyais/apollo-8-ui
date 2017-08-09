@@ -1,4 +1,5 @@
 v = {}
+editor = {}
 
 ajax = (opts, cb) ->
   $.ajax(
@@ -20,10 +21,12 @@ __initialize_app_vue = () ->
     el: '#apollo-8-ui'
     delimiters: ['<%', '%>']
     data:
-      nginxConfd: []
+      nginxConfd: [ 'amartha.conf' ]
+      nginxSelected: null
     methods: 
       loadNginxConfd: loadNginxConfd
       nginxCreateSubmit: nginxCreateSubmit
+      nginxGetSelected: nginxGetSelected
 
 __initialize_editor = () ->
   editor = ace.edit 'editor-nginx'
@@ -66,3 +69,19 @@ nginxCreateSubmit = (ev) ->
   ajax opts, (err, resp) ->
     alert err.c if err
     location.reload()
+
+### -------------------
+    @vue
+    nginxGetSelected - get selected conf.d file
+--------------------- ###
+nginxGetSelected = (item, ev) ->
+  nginxConfigName = item
+  url = env.baseUrl + '/api/v1/nginx/' + nginxConfigName
+  
+  opts =
+    method: 'GET'
+    url: url
+
+  ajax opts, (err, resp) ->
+    alert err.c if err
+    editor.setValue resp.data
