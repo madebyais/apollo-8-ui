@@ -31,12 +31,12 @@ __initialize_app_vue = () ->
 __initialize_editor = () ->
   editor = ace.edit 'editor-nginx'
   editor.setTheme 'ace/theme/monokai'
-  editor.getSession().setMode 'ace/mode/javascript'
+  # editor.getSession().setMode 'ace/mode/javascript'
 
 $(document).ready ->
   __initialize_app_vue()
   __initialize_editor()
-
+  
   v.loadNginxConfd()
 
 ### -------------------

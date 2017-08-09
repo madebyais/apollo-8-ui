@@ -81,8 +81,8 @@
         <div class="row">
           <div class="col-md-4">
             <h6 v-if="nginxConfd.length &lt; 1">No configuration files have been found.</h6>
-            <ul id="list-nginx" v-for="item in nginxConfd" v-if="nginxConfd.length &gt; 0">
-              <li v-on:click="nginxGetSelected(item, $event)" v-bind:id="'nginx-' + item.replace('.conf', '')"><% item %></li>
+            <ul id="list-nginx">
+              <li v-for="item in nginxConfd" v-on:click="nginxGetSelected(item, $event)" v-bind:id="'nginx-' + item.replace('.conf', '')"><% item %></li>
             </ul>
           </div>
           <div class="col-md-8">
