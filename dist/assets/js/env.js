@@ -1,3 +1,3 @@
 var env = {
-  baseUrl: '/api'
+  baseUrl: 'http://ais.amartha.id:4000'
 };

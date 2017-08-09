@@ -1,3 +1,4 @@
+Vue.config.delimiters = ['{', '}'];
 
 v = {}
 
