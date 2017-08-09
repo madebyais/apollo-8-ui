@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Apollo 8</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/toolkit.inverse-min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
+    <div id="apollo-8-ui">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h6 class="bry">Dashboards</h6>
+            <h2 class="brx">Overview</h2>
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="box-overview"><small>NGINX CONF.D</small>
+              <h1>1,234</h1>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="box-overview"><small>RUNNING APPS</small>
+              <h1>1,234</h1>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="box-overview"><small>OFFLINE APPS</small>
+              <h1>0</h1>
+            </div>
+          </div>
+        </div><br><br>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="float-sm-left">
+              <h6 class="bry">Application</h6>
+              <h2 class="brx">Services</h2>
+            </div>
+            <div class="float-sm-right">
+              <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-create-service"><small>Add Service</small></button>
+            </div>
+            <div class="clear"></div>
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="box-service online">
+              <h5>Application Name</h5><span class="port">9000</span>
+              <hr>
+              <h6>ONLINE</h6>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box-service offline">
+              <h5>Application Name</h5><span class="port">9000</span>
+              <hr>
+              <h6>OFFLINE</h6>
+            </div>
+          </div>
+        </div><br><br>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="float-sm-left">
+              <h6 class="bry">Conf.d</h6>
+              <h2 class="brx">Nginx</h2>
+            </div>
+            <div class="float-sm-right">
+              <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-create-nginx"><small>Add Config</small></button>
+            </div>
+            <div class="clear"></div>
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h6 v-if="nginxConfd.length &lt; 1">No configuration files have been found.</h6>
+            <ul id="list-nginx" v-for="item in nginxConfd" v-if="nginxConfd.length &gt; 0">
+              <li>{{ item }}</li>
+            </ul>
+          </div>
+          <div class="col-md-8">
+            <div id="editor-nginx"></div>
+          </div>
+        </div><br><br><br>
+        <div class="row">
+          <div class="col-md-12 text-center"><span>Designed and built with all the love in the world by </span><br><a href="https://github.com/~monologid">Monolog Studio</a></div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-create-service">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Create new SERVICE config</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <p>goes here</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="button">Submit</button>
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-create-nginx">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Create new NGINX config</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label>Name</label>
+                  <input class="form-control" type="text" id="input-nginx-confd-name">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" id="btn-submit" type="button" v-on:click="nginxCreateSubmit">Submit</button>
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.2.8/ace.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.4.0/vue.min.js"></script>
+    <script src="assets/js/env.js"></script>
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>

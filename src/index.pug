@@ -1,0 +1,129 @@
+doctype
+html
+  head
+    title Apollo 8
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+
+    link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Roboto")
+    link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css", integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ", crossorigin="anonymous")
+    link(rel="stylesheet", href="assets/css/toolkit.inverse-min.css")
+    link(rel="stylesheet", href="assets/css/style.css")
+  
+  body
+    #apollo-8-ui
+      .container
+        .row
+          .col-md-12
+            h6.bry Dashboards
+            h2.brx Overview
+            hr
+
+        .row
+          .col-md-4
+            .box-overview
+              small NGINX CONF.D
+              h1 1,234
+          .col-md-4
+            .box-overview
+              small RUNNING APPS
+              h1 1,234
+          .col-md-4
+            .box-overview
+              small OFFLINE APPS
+              h1 0
+        br
+        br
+
+        .row
+          .col-md-12
+            .float-sm-left
+              h6.bry Application
+              h2.brx Services
+            .float-sm-right
+              button.btn.btn-primary(type="button", data-toggle="modal", data-target="#modal-create-service")
+                small Add Service
+            .clear
+            hr
+
+        .row
+          .col-md-3
+            .box-service.online
+              h5 Application Name
+              span.port 9000
+              hr
+              h6 ONLINE
+          .col-md-3
+            .box-service.offline
+              h5 Application Name
+              span.port 9000
+              hr
+              h6 OFFLINE
+        br
+        br
+        .row
+          .col-md-12
+            .float-sm-left
+              h6.bry Conf.d
+              h2.brx Nginx
+            .float-sm-right
+              button.btn.btn-primary(type="button", data-toggle="modal", data-target="#modal-create-nginx")
+                small Add Config
+            .clear
+            hr
+
+        .row
+          .col-md-4
+            h6(v-if="nginxConfd.length < 1") No configuration files have been found.
+            ul#list-nginx(v-for="item in nginxConfd", v-if="nginxConfd.length > 0")
+              li {{ item }}
+
+          .col-md-8
+            #editor-nginx
+
+        br
+        br
+        br
+        
+        .row
+          .col-md-12.text-center
+            span Designed and built with all the love in the world by 
+            br
+            a(href="https://github.com/~monologid") Monolog Studio
+
+      #modal-create-service.modal.fade
+        .modal-dialog
+          .modal-content
+            .modal-header
+              h5.modal-title Create new SERVICE config
+              button.close(type="button", data-dismiss="modal", aria-label="Close")
+                span(aria-hidden="true") &times;
+            .modal-body
+              p goes here
+            .modal-footer
+              button.btn.btn-primary(type="button") Submit
+              button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+
+      #modal-create-nginx.modal.fade
+        .modal-dialog
+          .modal-content
+            .modal-header
+              h5.modal-title Create new NGINX config
+              button.close(type="button", data-dismiss="modal", aria-label="Close")
+                span(aria-hidden="true") &times;
+            .modal-body
+              form
+                .form-group
+                  label Name
+                  input.form-control(type="text", id="input-nginx-confd-name")
+            .modal-footer
+              button#btn-submit.btn.btn-primary(type="button", v-on:click="nginxCreateSubmit") Submit
+              button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+
+    script(src="//code.jquery.com/jquery-3.2.1.min.js", integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=", crossorigin="anonymous")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js", integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb", crossorigin="anonymous")
+    script(src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js", integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn", crossorigin="anonymous")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/ace/1.2.8/ace.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/vue/2.4.0/vue.min.js")
+    script(src="assets/js/env.js")
+    script(src="assets/js/script.js")
