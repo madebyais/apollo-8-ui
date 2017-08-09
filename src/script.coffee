@@ -7,7 +7,7 @@ ajax = (opts, cb) ->
   $.ajax(
     type: opts.method
     url: opts.url
-    data: opts.data
+    data: JSON.stringify opts.data
     success: (r) ->
       cb(null, r)
     error: (a, b, c) ->
