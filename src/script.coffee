@@ -21,7 +21,7 @@ __initialize_app_vue = () ->
     el: '#apollo-8-ui'
     delimiters: ['<%', '%>']
     data:
-      nginxConfd: [ 'amartha.conf' ]
+      nginxConfd: []
       nginxSelected: null
     methods: 
       loadNginxConfd: loadNginxConfd
