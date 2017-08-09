@@ -59,7 +59,7 @@ loadNginxConfd = (ev) ->
     nginxCreateSubmit - submit new nginx conf.d file
 --------------------- ###
 nginxCreateSubmit = (ev) ->
-  nginxConfigName = $('input-nginx-confd-name').val()
+  nginxConfigName = $('#input-nginx-confd-name').val()
   url = env.baseUrl + '/api/v1/nginx/' + nginxConfigName + '.conf'
   
   opts =
