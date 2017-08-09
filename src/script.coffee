@@ -1,11 +1,10 @@
-Vue.config.delimiters = ['{', '}'];
-
 v = {}
 
 ajax = (opts, cb) ->
   $.ajax(
     type: opts.method
     url: opts.url
+    dataType: 'json'
     success: (r) ->
       cb(null, r)
     error: (a, b, c) ->
@@ -19,6 +18,7 @@ ajax = (opts, cb) ->
 __initialize_app_vue = () ->
   v = new Vue
     el: '#apollo-8-ui'
+    delimiters: ['<%', '%>']
     data:
       nginxConfd: []
     methods: 
