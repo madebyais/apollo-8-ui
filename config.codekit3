@@ -45,6 +45,14 @@
 		"oF": 0,
 		"oS": 3
 		},
+	"\/dist\/assets\/js\/data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "\/dist\/assets\/js\/data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"\/dist\/assets\/js\/env-min.js": {
 		"ft": 64,
 		"mi": 1,

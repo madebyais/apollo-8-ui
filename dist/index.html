@@ -27,12 +27,12 @@
           </div>
           <div class="col-md-4">
             <div class="box-overview"><small>RUNNING APPS</small>
-              <h1>0</h1>
+              <h1><% applicationServicesOnline %></h1>
             </div>
           </div>
           <div class="col-md-4">
             <div class="box-overview"><small>OFFLINE APPS</small>
-              <h1>0</h1>
+              <h1><% applicationServicesOffline %></h1>
             </div>
           </div>
         </div><br><br>
@@ -50,18 +50,15 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-3">
-            <div class="box-service online">
-              <h5>Application Name</h5><span class="port">9000</span>
-              <hr>
-              <h6>ONLINE</h6>
-            </div>
+          <div class="col-md-12" v-if="applicationServices.length &lt; 1"> 
+            <h6>No application services have been found.</h6>
           </div>
-          <div class="col-md-3">
-            <div class="box-service offline">
-              <h5>Application Name</h5><span class="port">9000</span>
+          <div class="col-md-3" v-for="item in applicationServices">
+            <div class="box-service" v-bind:class="{ online: item.status, offline: !item.status }">
+              <h5><% item.name %></h5><span class="port"><% item.port %></span>
               <hr>
-              <h6>OFFLINE</h6>
+              <h6 v-if="item.status">ONLINE</h6>
+              <h6 v-if="!item.status">OFFLINE</h6>
             </div>
           </div>
         </div><br><br>
@@ -81,18 +78,18 @@
         <div class="row">
           <div class="col-md-4">
             <h6 v-if="nginxConfd.length &lt; 1">No configuration files have been found.</h6>
-            <ul id="list-nginx">
+            <ul id="list-nginx" v-if="nginxConfd.length &gt; 0">
               <li v-for="item in nginxConfd" v-on:click="nginxGetSelected(item, $event)" v-bind:id="'nginx-' + item.replace('.conf', '')"><% item %></li>
             </ul>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8" v-if="nginxConfd.length &gt; 0">
             <div id="editor-nginx"></div><br>
             <div class="float-sm-right">
               <button class="btn btn-primary" type="button" v-on:click="nginxUpdate"><small>Save</small></button>
             </div>
             <div class="clear"></div>
           </div>
-        </div><br><br><br>
+        </div><br><br><br><br><br><br>
         <div class="row">
           <div class="col-md-12 text-center"><span>Designed and built with all the love in the world by </span><br><a href="https://github.com/~monologid">Monolog Studio</a></div>
         </div>

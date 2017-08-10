@@ -27,11 +27,11 @@ html
           .col-md-4
             .box-overview
               small RUNNING APPS
-              h1 0
+              h1 <% applicationServicesOnline %>
           .col-md-4
             .box-overview
               small OFFLINE APPS
-              h1 0
+              h1 <% applicationServicesOffline %>
         br
         br
 
@@ -47,18 +47,21 @@ html
             hr
 
         .row
-          .col-md-3
-            .box-service.online
-              h5 Application Name
-              span.port 9000
+          .col-md-12(v-if="applicationServices.length < 1") 
+            h6 No application services have been found.
+          .col-md-3(v-for="item in applicationServices")
+            .box-service(v-bind:class="{ online: item.status, offline: !item.status }")
+              h5 <% item.name %>
+              span.port <% item.port %>
               hr
-              h6 ONLINE
-          .col-md-3
-            .box-service.offline
-              h5 Application Name
-              span.port 9000
-              hr
-              h6 OFFLINE
+              h6(v-if="item.status") ONLINE
+              h6(v-if="!item.status") OFFLINE
+          //- .col-md-3
+          //-   .box-service.offline
+          //-     h5 Application Name
+          //-     span.port 9000
+          //-     hr
+          //-     h6 OFFLINE
         br
         br
         .row
@@ -75,16 +78,19 @@ html
         .row
           .col-md-4
             h6(v-if="nginxConfd.length < 1") No configuration files have been found.
-            ul#list-nginx
+            ul#list-nginx(v-if="nginxConfd.length > 0")
               li(v-for="item in nginxConfd", v-on:click="nginxGetSelected(item, $event)" v-bind:id="'nginx-' + item.replace('.conf', '')") <% item %>
 
-          .col-md-8
+          .col-md-8(v-if="nginxConfd.length > 0")
             #editor-nginx
             br
             .float-sm-right
               button.btn.btn-primary(type="button", v-on:click="nginxUpdate")
                 small Save
             .clear
+        br
+        br
+        br
         br
         br
         br

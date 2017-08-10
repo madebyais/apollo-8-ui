@@ -24,9 +24,13 @@ __initialize_app_vue = () ->
     el: '#apollo-8-ui'
     delimiters: ['<%', '%>']
     data:
+      applicationServices: []
+      applicationServicesOnline: 0
+      applicationServicesOffline: 0
       nginxConfd: []
       nginxSelected: null
     methods: 
+      loadAppServ: loadAppServ
       loadNginxConfd: loadNginxConfd
       nginxCreateSubmit: nginxCreateSubmit
       nginxGetSelected: nginxGetSelected
@@ -41,6 +45,7 @@ $(document).ready ->
   __initialize_app_vue()
   __initialize_editor()
   
+  v.loadAppServ()
   v.loadNginxConfd()
 
 ### -------------------
@@ -109,3 +114,43 @@ nginxUpdate = () ->
   ajax opts, (err, resp) ->
     return alert(err.b) if err
     location.reload() 
+
+### -------------------
+    @vue
+    loadAppServ - load application services
+--------------------- ###
+loadAppServ = () ->
+  opts =
+    method: 'GET'
+    url: env.baseUrl + '/api/v1/appserv'
+  
+  ajax opts, (err, resp) ->
+    data = resp.data
+    config = JSON.parse(data.config)
+    netstat = data.netstat
+
+    tempAppserv = {}
+    appservPort = []
+    config.forEach (i) ->
+      tempAppserv[i.port.toString()] = i
+      appservPort.push i.port.toString()
+
+    appservOnline = 0
+    appservOffline = 0
+    netstat.forEach (i) ->
+      appservPort.forEach (p) ->
+        i = i.replace(/\s/gi, ' ')
+        if i.indexOf(p) > -1
+          tempAppserv[p].status = true
+          appservOnline++
+    
+    appserv = []
+    for key of tempAppserv
+      appserv.push tempAppserv[key]
+
+      if not tempAppserv[key].status
+        appservOffline++
+    
+    v._data.applicationServices = appserv
+    v._data.applicationServicesOnline = appservOnline
+    v._data.applicationServicesOffline = appservOffline
