@@ -54,6 +54,7 @@ $(document).ready ->
     loadNginxConfd - load list of nginx conf.d
 --------------------- ###
 loadNginxConfd = (ev) ->
+  __initialize_editor() 
   url = env.baseUrl + '/api/v1/nginx'
 
   opts = 
