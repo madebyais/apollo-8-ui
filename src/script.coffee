@@ -37,8 +37,9 @@ __initialize_app_vue = () ->
       nginxUpdate: nginxUpdate
 
 __initialize_editor = () ->
-  editor = ace.edit 'editor-nginx'
-  editor.setTheme 'ace/theme/monokai'
+  if $('#editor-nginx') && $('#editor-nginx').length > 0
+    editor = ace.edit 'editor-nginx'
+    editor.setTheme 'ace/theme/monokai'
   # editor.getSession().setMode 'ace/mode/javascript'
 
 $(document).ready ->
