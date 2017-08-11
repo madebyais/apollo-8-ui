@@ -81,7 +81,7 @@ html
             ul#list-nginx(v-if="nginxConfd.length > 0")
               li(v-for="item in nginxConfd", v-on:click="nginxGetSelected(item, $event)" v-bind:id="'nginx-' + item.replace('.conf', '')") <% item %>
 
-          .col-md-8(v-if="nginxConfd.length > 0")
+          .col-md-8
             #editor-nginx
             br
             .float-sm-right

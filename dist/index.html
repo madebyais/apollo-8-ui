@@ -82,7 +82,7 @@
               <li v-for="item in nginxConfd" v-on:click="nginxGetSelected(item, $event)" v-bind:id="'nginx-' + item.replace('.conf', '')"><% item %></li>
             </ul>
           </div>
-          <div class="col-md-8" v-if="nginxConfd.length &gt; 0">
+          <div class="col-md-8">
             <div id="editor-nginx"></div><br>
             <div class="float-sm-right">
               <button class="btn btn-primary" type="button" v-on:click="nginxUpdate"><small>Save</small></button>
